@@ -122,10 +122,13 @@ watch(area2, async (nw, od) => {
 const renderChart = () => {
   const edd = []
   const flood = []
+  let pointsPerDay = 72
   for (let day in chart.value) {
-    tideData.push(...chart.value[day].tide.map(v => v.cm))
+    const dayTide = chart.value[day].tide
+    if (tideData.length === 0) pointsPerDay = dayTide.length - 1
+    tideData.push(...dayTide.map(v => v.cm))
     tideData.pop()
-    timeData.push(...chart.value[day].tide.map(v => v.time))
+    timeData.push(...dayTide.map(v => v.time))
     timeData.pop()
     edd.push(chart.value[day].edd)
     flood.push(chart.value[day].flood)
@@ -158,13 +161,13 @@ const renderChart = () => {
                 if (
                   (tideData[ctx.dataIndex] >= tideData[ctx.dataIndex - 1] &&
                   tideData[ctx.dataIndex] > tideData[ctx.dataIndex + 1]) &&
-                  flood[Math.floor(ctx.dataIndex / 72)]?.[0]
+                  flood[Math.floor(ctx.dataIndex / pointsPerDay)]?.[0]
                 ) {
                   return Math.round(value)
                 } else if (
                   (tideData[ctx.dataIndex] <= tideData[ctx.dataIndex - 1] &&
                   tideData[ctx.dataIndex] < tideData[ctx.dataIndex + 1]) &&
-                  edd[Math.floor(ctx.dataIndex / 72)]?.[0]
+                  edd[Math.floor(ctx.dataIndex / pointsPerDay)]?.[0]
                 ) {
                   return '\r\n' + Math.round(value)
                 } else {
@@ -192,12 +195,12 @@ const renderChart = () => {
               formatter: function (value, ctx) {
                 if ((tideData[ctx.dataIndex] >= tideData[ctx.dataIndex - 1] &&
                   tideData[ctx.dataIndex] > tideData[ctx.dataIndex + 1]) &&
-                  flood[Math.floor(ctx.dataIndex / 72)]?.[0]) {
-                  return flood[Math.floor(ctx.dataIndex / 72)].shift()?.time + '\r\n'
+                  flood[Math.floor(ctx.dataIndex / pointsPerDay)]?.[0]) {
+                  return flood[Math.floor(ctx.dataIndex / pointsPerDay)].shift()?.time + '\r\n'
                 } else if ((tideData[ctx.dataIndex] <= tideData[ctx.dataIndex - 1] &&
                   tideData[ctx.dataIndex] < tideData[ctx.dataIndex + 1]) &&
-                  edd[Math.floor(ctx.dataIndex / 72)]?.[0]) {
-                  return edd[Math.floor(ctx.dataIndex / 72)].shift()?.time + '\r\n'
+                  edd[Math.floor(ctx.dataIndex / pointsPerDay)]?.[0]) {
+                  return edd[Math.floor(ctx.dataIndex / pointsPerDay)].shift()?.time + '\r\n'
                 } else {
                   return null
                 }
