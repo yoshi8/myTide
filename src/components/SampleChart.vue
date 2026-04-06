@@ -78,8 +78,8 @@ let mn = date.get('month') + 1
 let dy = date.get('date')
 let rg = 'week'
 let myChart
-let area1 = ref('0')
-let area2 = ref('0')
+let area1 = ref(0)
+let area2 = ref(0)
 
 const myCanvas = ref(null)
 
