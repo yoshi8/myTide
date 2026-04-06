@@ -21,6 +21,7 @@
     <v-row class="mt-5 ml-15" v-if="area1 == 0">
       <v-btn-toggle divided v-model="area2">
         <v-btn class="" variant="outlined"> 船橋 </v-btn>
+        <v-btn class="" variant="outlined"> 築地 </v-btn>
         <v-btn class="" variant="outlined"> 横浜 </v-btn>
         <v-btn class="" variant="outlined"> 館山 </v-btn>
         <v-btn class="" variant="outlined"> 鹿島 </v-btn>
@@ -93,16 +94,17 @@ watch(area1, async (nw, od) => {
 })
 watch(area2, async (nw, od) => {
   if (area1.value == 0) {
-    if (nw == 0) {hc = '12'} // 船橋
-    if (nw == 1) {hc = '3'; pc='14'} // 横浜
-    if (nw == 2) {hc = '19'} // 館山
-    if (nw == 3) {hc = '4'; pc='8'} // 鹿島
+    if (nw == 0) {hc = '12'; pc='12'} // 船橋
+    if (nw == 1) {hc = '1'; pc='13'} // 築地
+    if (nw == 2) {hc = '3'; pc='14'} // 横浜
+    if (nw == 3) {hc = '19'; pc='12'} // 館山
+    if (nw == 4) {hc = '4'; pc='8'} // 鹿島
   }
   if (area1.value == 1) {
-    if (nw == 0) {hc = '6'} // 尼崎
+    if (nw == 0) {hc = '6'; pc='28'} // 尼崎
     if (nw == 1) {hc = '6'; pc='27'} // 大阪
-    if (nw == 2) {hc = '7'} // 神戸
-    if (nw == 3) {hc = '4'} // 洲本
+    if (nw == 2) {hc = '7'; pc='28'} // 神戸
+    if (nw == 3) {hc = '4'; pc='28'} // 洲本
     if (nw == 4) {hc = '11'; pc='30'} // 和歌山
     if (nw == 5) {hc = '3'; pc='30'} // 串本
   }
@@ -309,110 +311,110 @@ const writeCanvas = () => {
   const canvas = document.getElementById("chart")
   const ctx = canvas.getContext("2d")
 
-  // boxes
-  ctx.strokeStyle = 'blue'
-  ctx.lineWidth = 3
-  ctx.rect(2, 2, canvas.clientWidth - 14, canvas.clientHeight - 3)
-  ctx.stroke()
+  // // boxes
+  // ctx.strokeStyle = 'blue'
+  // ctx.lineWidth = 3
+  // ctx.rect(2, 2, canvas.clientWidth - 14, canvas.clientHeight - 3)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.rect(5, 5, canvas.clientWidth - 18, canvas.clientHeight / 6.6)
-  ctx.stroke()
-  ctx.fillStyle = "white"
-  ctx.fillRect(4, 4, canvas.clientWidth - 17, canvas.clientHeight / 6.6)
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.rect(5, 5, canvas.clientWidth - 18, canvas.clientHeight / 6.6)
+  // ctx.stroke()
+  // ctx.fillStyle = "white"
+  // ctx.fillRect(4, 4, canvas.clientWidth - 17, canvas.clientHeight / 6.6)
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(0, canvas.clientHeight / 6.6 / 2 + 2.5)
-  ctx.lineTo(canvas.clientWidth - 13, canvas.clientHeight / 6.6 / 2 + 2.5)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(0, canvas.clientHeight / 6.6 / 2 + 2.5)
+  // ctx.lineTo(canvas.clientWidth - 13, canvas.clientHeight / 6.6 / 2 + 2.5)
+  // ctx.stroke()
 
-  // vertical lines
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44, 2)
-  ctx.lineTo(44, canvas.clientHeight / 6.6 + 3)
-  ctx.stroke()
+  // // vertical lines
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44, 2)
+  // ctx.lineTo(44, canvas.clientHeight / 6.6 + 3)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.02, 2)
-  ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.02, canvas.clientHeight / 6.6 + 3)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.02, 2)
+  // ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.02, canvas.clientHeight / 6.6 + 3)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.045 * 2, 2)
-  ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.045 * 2, canvas.clientHeight / 6.6 + 3)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.045 * 2, 2)
+  // ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.045 * 2, canvas.clientHeight / 6.6 + 3)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.039 * 3, 2)
-  ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.039 * 3, canvas.clientHeight / 6.6 + 3)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.039 * 3, 2)
+  // ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.039 * 3, canvas.clientHeight / 6.6 + 3)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.049 * 4, 2)
-  ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.049 * 4, canvas.clientHeight / 6.6 + 3)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.049 * 4, 2)
+  // ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.049 * 4, canvas.clientHeight / 6.6 + 3)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 48) / 7.039 * 5, 2)
-  ctx.lineTo(44 + (canvas.clientWidth - 48) / 7.039 * 5, canvas.clientHeight / 6.6 + 3)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 48) / 7.039 * 5, 2)
+  // ctx.lineTo(44 + (canvas.clientWidth - 48) / 7.039 * 5, canvas.clientHeight / 6.6 + 3)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 48) / 7.039 * 6, 2)
-  ctx.lineTo(44 + (canvas.clientWidth - 48) / 7.039 * 6, canvas.clientHeight / 6.6 + 3)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 48) / 7.039 * 6, 2)
+  // ctx.lineTo(44 + (canvas.clientWidth - 48) / 7.039 * 6, canvas.clientHeight / 6.6 + 3)
+  // ctx.stroke()
 
-  // vertical bottom
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44, canvas.clientHeight - 3)
-  ctx.lineTo(44, canvas.clientHeight - 30)
-  ctx.stroke()
+  // // vertical bottom
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44, canvas.clientHeight - 3)
+  // ctx.lineTo(44, canvas.clientHeight - 30)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.02, canvas.clientHeight - 3)
-  ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.02, canvas.clientHeight - 30)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.02, canvas.clientHeight - 3)
+  // ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.02, canvas.clientHeight - 30)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.045 * 2, canvas.clientHeight - 3)
-  ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.045 * 2, canvas.clientHeight - 30)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.045 * 2, canvas.clientHeight - 3)
+  // ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.045 * 2, canvas.clientHeight - 30)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.039 * 3, canvas.clientHeight - 3)
-  ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.039 * 3, canvas.clientHeight - 30)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.039 * 3, canvas.clientHeight - 3)
+  // ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.039 * 3, canvas.clientHeight - 30)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.049 * 4, canvas.clientHeight - 3)
-  ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.049 * 4, canvas.clientHeight - 30)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 47) / 7.049 * 4, canvas.clientHeight - 3)
+  // ctx.lineTo(44 + (canvas.clientWidth - 47) / 7.049 * 4, canvas.clientHeight - 30)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 48) / 7.039 * 5, canvas.clientHeight - 3)
-  ctx.lineTo(44 + (canvas.clientWidth - 48) / 7.039 * 5, canvas.clientHeight - 30)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 48) / 7.039 * 5, canvas.clientHeight - 3)
+  // ctx.lineTo(44 + (canvas.clientWidth - 48) / 7.039 * 5, canvas.clientHeight - 30)
+  // ctx.stroke()
 
-  ctx.beginPath()
-  ctx.lineWidth = 3
-  ctx.moveTo(44 + (canvas.clientWidth - 48) / 7.039 * 6, canvas.clientHeight - 3)
-  ctx.lineTo(44 + (canvas.clientWidth - 48) / 7.039 * 6, canvas.clientHeight - 30)
-  ctx.stroke()
+  // ctx.beginPath()
+  // ctx.lineWidth = 3
+  // ctx.moveTo(44 + (canvas.clientWidth - 48) / 7.039 * 6, canvas.clientHeight - 3)
+  // ctx.lineTo(44 + (canvas.clientWidth - 48) / 7.039 * 6, canvas.clientHeight - 30)
+  // ctx.stroke()
 
   // text
   ctx.fillStyle = "blue"
