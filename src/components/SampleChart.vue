@@ -133,6 +133,27 @@ const renderChart = () => {
     edd.push(chart.value[day].edd)
     flood.push(chart.value[day].flood)
   }
+
+  // データポイントとイベント時刻の対応を事前計算
+  const labelValue = {}  // dataIndex -> 表示する値 (数値 or '\r\n'+数値)
+  const labelTime = {}   // dataIndex -> 表示する時刻文字列
+  const floodIdx = new Array(flood.length).fill(0)
+  const eddIdx = new Array(edd.length).fill(0)
+  for (let i = 0; i < tideData.length; i++) {
+    const d = Math.floor(i / pointsPerDay)
+    const isMax = tideData[i] >= tideData[i - 1] && tideData[i] > tideData[i + 1]
+    const isMin = tideData[i] <= tideData[i - 1] && tideData[i] < tideData[i + 1]
+    if (isMax && flood[d]?.[floodIdx[d]]) {
+      labelValue[i] = Math.round(tideData[i])
+      labelTime[i] = flood[d][floodIdx[d]].time + '\r\n'
+      floodIdx[d]++
+    } else if (isMin && edd[d]?.[eddIdx[d]]) {
+      labelValue[i] = '\r\n' + Math.round(tideData[i])
+      labelTime[i] = edd[d][eddIdx[d]].time + '\r\n'
+      eddIdx[d]++
+    }
+  }
+
   let ctx = document.getElementById("chart");
   myChart = new Chart(ctx, {
     type: 'line',
@@ -157,23 +178,8 @@ const renderChart = () => {
                   return 'start'
                 }
               },
-              formatter: function (value, ctx) {
-                if (
-                  (tideData[ctx.dataIndex] >= tideData[ctx.dataIndex - 1] &&
-                  tideData[ctx.dataIndex] > tideData[ctx.dataIndex + 1]) &&
-                  flood[Math.floor(ctx.dataIndex / pointsPerDay)]?.[0]
-                ) {
-                  return Math.round(value)
-                } else if (
-                  (tideData[ctx.dataIndex] <= tideData[ctx.dataIndex - 1] &&
-                  tideData[ctx.dataIndex] < tideData[ctx.dataIndex + 1]) &&
-                  edd[Math.floor(ctx.dataIndex / pointsPerDay)]?.[0]
-                ) {
-                  return '\r\n' + Math.round(value)
-                } else {
-                  return null
-                }
-
+              formatter: function (_value, ctx) {
+                return labelValue[ctx.dataIndex] ?? null
               },
             },
             time: {
@@ -192,19 +198,8 @@ const renderChart = () => {
                   return 'start'
                 }
               },
-              formatter: function (value, ctx) {
-                if ((tideData[ctx.dataIndex] >= tideData[ctx.dataIndex - 1] &&
-                  tideData[ctx.dataIndex] > tideData[ctx.dataIndex + 1]) &&
-                  flood[Math.floor(ctx.dataIndex / pointsPerDay)]?.[0]) {
-                  return flood[Math.floor(ctx.dataIndex / pointsPerDay)].shift()?.time + '\r\n'
-                } else if ((tideData[ctx.dataIndex] <= tideData[ctx.dataIndex - 1] &&
-                  tideData[ctx.dataIndex] < tideData[ctx.dataIndex + 1]) &&
-                  edd[Math.floor(ctx.dataIndex / pointsPerDay)]?.[0]) {
-                  return edd[Math.floor(ctx.dataIndex / pointsPerDay)].shift()?.time + '\r\n'
-                } else {
-                  return null
-                }
-
+              formatter: function (_value, ctx) {
+                return labelTime[ctx.dataIndex] ?? null
               },
             },
           }
