@@ -266,7 +266,7 @@ const renderChart = () => {
         writeCanvasWhite()
       },
       afterRender: function (chart, args, options) {
-        writeCanvas()
+        // writeCanvas()
       }
     }]
   });
