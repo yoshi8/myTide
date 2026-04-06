@@ -247,6 +247,7 @@ const renderChart = () => {
       },
       plugins: {
         datalabels: {
+          clip: false,
           font: {
             size: 24,
             weight: 'bold'
